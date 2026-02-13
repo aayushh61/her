@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Surprise For You ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Indie+Flower&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -22,6 +22,7 @@
             font-family: 'Indie Flower', cursive;
             overflow: hidden;
             transition: background 1s;
+            touch-action: manipulation;
         }
 
         .container {
@@ -35,8 +36,8 @@
 
         .envelope-wrapper {
             position: relative;
-            width: 300px;
-            height: 200px;
+            width: 280px; /* Slightly smaller for mobile */
+            height: 180px;
             cursor: pointer;
             z-index: 10;
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -48,7 +49,7 @@
             height: 100%;
             background: var(--env-dark);
             border-radius: 0 0 10px 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .letter {
@@ -58,13 +59,13 @@
             width: 90%;
             height: 90%;
             background: var(--paper-color);
-            padding: 25px;
+            padding: 20px;
             box-sizing: border-box;
             transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), height 1s, width 1s;
             z-index: 2;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
+            overflow-y: auto; /* Important for long messages */
         }
 
         .front-flaps::before {
@@ -95,46 +96,56 @@
             transition: transform 0.6s ease;
         }
 
+        /* Adjusted for Mobile View */
         .envelope-wrapper.open .top-flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope-wrapper.open .letter { transform: translateY(-50%) scale(1.1); top: -20px; width: 320px; height: 450px; z-index: 15; left: -10px; }
-        .envelope-wrapper.open { transform: translateY(150px); }
+        .envelope-wrapper.open .letter { 
+            transform: translateY(-60%) scale(1.0); 
+            top: -10px; 
+            width: 300px; 
+            height: 400px; 
+            z-index: 15; 
+            left: -10px; 
+        }
+        .envelope-wrapper.open { transform: translateY(100px); }
 
         .wax-seal {
             position: absolute;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 60px; height: 60px;
+            transform: translate(-50%, -50%) scale(1);
+            width: 50px; height: 50px;
             background: #a81d33;
             border-radius: 50%;
             z-index: 10;
             display: flex; justify-content: center; align-items: center;
-            color: white; font-size: 1.5rem;
+            color: white; font-size: 1.2rem;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: transform 0.5s 0.8s;
+            transition: transform 0.5s;
         }
+        
+        .envelope-wrapper.open .wax-seal { transform: translate(-50%, -50%) scale(0); }
 
-        h1 { font-family: 'Dancing Script', cursive; color: var(--env-dark); font-size: 2rem; margin: 0; }
-        .text { font-size: 1.15rem; line-height: 1.6; color: #333; white-space: pre-wrap; margin-top: 15px; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--env-dark); font-size: 1.8rem; margin: 0; }
+        .text { font-size: 1rem; line-height: 1.5; color: #333; white-space: pre-wrap; margin-top: 10px; }
 
         .exit-btn {
             background: var(--env-dark);
             color: white; border: none; padding: 10px 20px;
             border-radius: 20px; font-family: 'Fredoka', sans-serif;
-            margin-top: 20px; cursor: pointer; transition: 0.3s;
+            margin-top: 15px; cursor: pointer; width: 100%;
         }
-        .exit-btn:hover { background: #ff4d6d; transform: scale(1.05); }
 
-        /* FINAL OVERLAY - THE END */
         #final-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: white; z-index: 1000;
             display: none; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; animation: fadeIn 1.5s forwards;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .instruction { position: absolute; bottom: -60px; width: 100%; text-align: center; color: var(--env-dark); font-weight: bold; animation: pulse 1.5s infinite; }
+        .instruction { position: absolute; bottom: -40px; width: 100%; text-align: center; color: var(--env-dark); font-weight: bold; animation: pulse 1.5s infinite; font-size: 0.9rem; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     </style>
 </head>
@@ -149,27 +160,20 @@
             <div class="envelope">
                 <div class="letter" id="letter">
                     <h1>Dearest Mudita,</h1>
-                    <div class="text">
-Hi cutie , Tujhe kya laga valentine's day bhul gaya kya me haa😎🙏 Unromantic hu alag baat h😔😔
+                    <div class="text">Hi cutie , Tujhe kya laga valentine's day bhul gaya kya me haa😎🙏 Unromantic hu alag baat h😔😔
 
-Thanks baby for choosing me even after having so many options , thanks for choosing this bhondu
-
+Thanks baby for choosing me even after having so many options , thanks for choosing this bhondu.
 
 Dhanyawad apke mere sath rhene k liye and I promise I wont leave you ever cutie pie and I don’t promise a perfect love story, but I promise honesty, effort, and choosing you again and again, no matter what .Thank you for being you and for being mine.
-
 
 Apne ko nhi pata how the future looks like, lekin I do know one thing and that is I want you in it. Not just on valentine’s day, but on normal days, bad days, and every ordinary moment in between.
 
 Thank you for choosing me, for staying, and for making my life softer and brighter just by being in it, meri comfort place h laadli tu ♥️
 
-
 Happy valentine's dayyyyyy maza godd baal♥️ 
 
- 
-
 Yours,
-Always.
-                    </div>
+Always.</div>
                     <button class="exit-btn" onclick="uniqueExit(event)">byeeeee ❤️</button>
                 </div>
             </div>
@@ -179,9 +183,9 @@ Always.
     </div>
 
     <div id="final-screen">
-        <h1 style="font-size: 5rem; margin: 0;">🌸</h1>
-        <h2 style="font-family: 'Dancing Script'; color: #d63351; font-size: 3rem;">Until Next Time, Mudita</h2>
-        <p style="font-family: 'Fredoka'; color: #666; font-size: 1.2rem; padding: 0 20px;">
+        <h1 style="font-size: 4rem; margin: 0;">🌸</h1>
+        <h2 style="font-family: 'Dancing Script'; color: #d63351; font-size: 2.2rem;">Until Next Time, Mudita</h2>
+        <p style="font-family: 'Fredoka'; color: #666; font-size: 1.1rem;">
             This memory is now permanently stored. <br> 
             Go check your phone, I might have sent you some pyarr!
         </p>
@@ -199,12 +203,12 @@ Always.
                 
                 setTimeout(() => {
                     confetti({
-                        particleCount: 150,
-                        spread: 70,
-                        origin: { y: 0.5 },
+                        particleCount: 100,
+                        spread: 60,
+                        origin: { y: 0.7 },
                         colors: ['#ff4d6d', '#ffffff']
                     });
-                }, 1000);
+                }, 800);
             }
         }
 
@@ -216,27 +220,22 @@ Always.
             const tFlap = document.getElementById('t-flap');
             const seal = document.getElementById('seal');
 
-            // 1. Slide letter back in
             letter.style.transform = "translateY(0) scale(0.1)";
             letter.style.opacity = "0";
 
-            // 2. Move envelope back
             setTimeout(() => {
                 env.style.transform = "translateY(0)";
             }, 500);
 
-            // 3. Close and Seal
             setTimeout(() => {
                 tFlap.style.transform = "rotateX(0deg)";
                 tFlap.style.zIndex = "5";
-                seal.style.transform = "translate(-50%, -50%) scale(1)";
             }, 1000);
 
-            // 4. Fade out
             setTimeout(() => {
                 document.getElementById('final-screen').style.display = 'flex';
                 document.body.style.background = "#ffffff";
-            }, 2500);
+            }, 2000);
         }
     </script>
 </body>
