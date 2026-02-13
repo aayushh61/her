@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudita's Secret Journal ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Indie+Flower&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #ffcad4; --page: #fffaf0; --accent: #ff4d6d; }
+        
+        body {
+            background: radial-gradient(circle, #fff5f5 0%, var(--bg) 100%);
+            font-family: 'Fredoka', sans-serif; height: 100vh; display: flex;
+            justify-content: center; align-items: center; margin: 0; overflow: hidden;
+            transition: opacity 0.8s;
+        }
+
+        /* --- BACKGROUND ANIMATIONS --- */
+        .floating-bg { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 1; pointer-events: none; }
+        .floating-heart { position: absolute; color: rgba(255, 77, 109, 0.2); font-size: 1.5rem; animation: floatUp 8s linear infinite; }
+        @keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg); } 100% { transform: translateY(-10vh) rotate(360deg); } }
+
+        /* --- HEART CLICK EFFECT --- */
+        .click-heart { position: fixed; color: var(--accent); font-size: 25px; pointer-events: none; animation: popUp 0.8s ease-out forwards; z-index: 1000; }
+        @keyframes popUp { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -150%) scale(2); opacity: 0; } }
+
+        /* --- BOOK STRUCTURE --- */
+        .book-container { perspective: 2000px; width: 95%; max-width: 400px; height: 600px; z-index: 10; }
+        .book { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; }
+        
+        .page {
+            width: 100%; height: 100%; position: absolute; background: var(--page);
+            border-radius: 0 20px 20px 0; padding: 25px; text-align: center;
+            transform-origin: left; transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1); 
+            backface-visibility: hidden; z-index: var(--z); border: 1px solid #ddd;
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.1); display: flex; flex-direction: column; cursor: pointer;
+        }
+        .page.flipped { transform: rotateY(-175deg) scale(1.02); z-index: 1 !important; }
+
+        /* Collage Cover - UNTOUCHED */
+        .collage-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
+        .polaroid { background: white; padding: 5px 5px 15px 5px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); transform: rotate(var(--r)); }
+        .polaroid img { width: 100%; height: 85px; object-fit: cover; }
+
+        /* Content Photos - INCREASED HEIGHT */
+        .page-img { 
+            width: 100%; 
+            height: 280px; /* Increased from 220px */
+            border-radius: 10px; 
+            object-fit: cover; 
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: imgFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes imgFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        h2 { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--accent); margin: 8px 0; }
+        .passage { font-family: 'Indie Flower', cursive; font-size: 1.2rem; font-weight: bold; color: #5d4037; }
+        .hint { margin-top: auto; font-size: 0.8rem; color: #ff8fa3; font-weight: bold; }
+
+        .btn-magic { 
+            background: var(--accent); color: white; padding: 12px 20px; 
+            border-radius: 15px; border: none; font-weight: 600; cursor: pointer; 
+            box-shadow: 0 5px 0 #c9184a; transition: transform 0.2s;
+        }
+        .btn-magic:active { transform: translateY(3px); box-shadow: 0 2px 0 #c9184a; }
+    </style>
+</head>
+<body onclick="heartClick(event)">
+
+    <div class="floating-bg" id="bgLayer"></div>
+
+    <div class="book-container">
+        <div class="book" id="book">
+            
+            <div class="page" style="--z: 10;" onclick="this.classList.add('flipped')">
+                <h2 style="font-size: 2.8rem; color: #c9184a;">Meri taraf se apke liye chotu sa giftt🥰</h2>
+                <div class="collage-grid">
+                    <div class="polaroid" style="--r: -5deg;"><img src="images/her1 (1).png"></div>
+                    <div class="polaroid" style="--r: 3deg;"><img src="images/her1 (2).png"></div>
+                    <div class="polaroid" style="--r: -2deg;"><img src="images/her1 (3).png"></div>
+                    <div class="polaroid" style="--r: 6deg;"><img src="images/her1 (4).png"></div>
+                    <div class="polaroid" style="--r: -4deg;"><img src="images/her1 (5).png"></div>
+                    <div class="polaroid" style="--r: 2deg;"><img src="images/her1 (6).png"></div>
+                </div>
+                <div class="passage" style="margin-top: 15px;">"cool lagne k liye 5 6 photo dale h😝"</div>
+                <div class="hint">Screen pe tap kar abh bauni</div>
+            </div>
+
+            <div class="page" style="--z: 9;" onclick="this.classList.add('flipped')">
+                <img src="images/rose.jpeg" class="page-img">
+                <h2>🌹 Rose Day</h2>
+                <div class="passage">"Rose day ko toh rose diya nhi maine 😔🙏 lekin first meet up pe diya tha na laadliiiii😎🙏 wohi wala rose hath me leee aur samaj abhi diya h 😋😋 "</div>
+                <div class="hint">NEXT →</div>
+            </div>
+
+            <div class="page" style="--z: 8;" onclick="this.classList.add('flipped')">
+                <img src="images/propose.jpeg" class="page-img">
+                <h2>💍 Propose Day</h2>
+                <div class="passage">"Agar tujhe yaad hoga tune hi mujhe propose kiya tha 😋🙏 agar yaad nhi h toh uper proof bhi hai dhekle usse 😎 woh toh accha h maine daya kha k propose accept kr liya tha🤣🤣🤣🫵🫵"</div>
+                <div class="hint">KEEP GOING →</div>
+            </div>
+
+            <div class="page" style="--z: 7;" onclick="this.classList.add('flipped')">
+                <img src="images/choclate.png" class="page-img">
+                <h2>🍫 Chocolate Day</h2>
+                <div class="passage">"Chocolate toh kabhi diya nhi maine khud se tujhe 😔 kitna ganda bf hu na 😔 ice diya diya tha usse hi kaam chala lena bro😋♥️"</div>
+                <div class="hint">FLIP →</div>
+            </div>
+
+            <div class="page" style="--z: 6;" onclick="this.classList.add('flipped')">
+                <img src="images/teddy.png" class="page-img">
+                <h2>🧸 Teddy Day</h2>
+                <div class="passage">"Teddy mai tujhe dena chaiye lekin tune mujhe diya tha 😭😭😭 ofc you remember our bondu right ? 🤣🤣🤣"</div>
+                <div class="hint">ALMOST THERE →</div>
+            </div>
+
+            <div class="page" style="--z: 5;" onclick="this.classList.add('flipped')">
+                <img src="images/promise.png" class="page-img"> 
+                <h2>🤝 Promise Day</h2>
+                <div class="passage">"Promise toh tu 100 karti h lekin 99 bhul jaati h unme se 🤣🤣🫵🫵Promise day toh tujhe manana hi nhi chaiye hatt🤬 kabhi promise pura Kiya h ky ek bhi haa haa🙅🏽👎→</div>
+            </div>
+
+            <div class="page" style="--z: 4;" onclick="this.classList.add('flipped')">
+                <img src="images/hug.png" class="page-img">
+                <h2>🫂 Hug Day</h2>
+                <div class="passage">"Hug day nhi manate fir mujhe hug krne ka maan hojata h yr😔😔😔"</div>
+                <div class="hint">ONE MORE →</div>
+            </div>
+
+            <div class="page" style="--z: 3;" onclick="this.classList.add('flipped')">
+                <img src="images/kiss.png" class="page-img"> 
+                <h2>💋 Kiss Day</h2>
+                <div class="passage">"Kiss ?? Ye kya hota h bhai?? We never did that , shiiiiiiiiiiiiiiii 😔😔😔👎👎👎"</div>
+                <div class="hint">THE FINAL DAY →</div>
+            </div>
+
+            <div class="page" style="--z: 1;">
+                <img src="images/valentines.png" class="page-img">
+                <h2>💝 Valentine's Day</h2>
+                <div class="passage">"Anddddd Finally HAPPY VALENTINE'S DAYY MERI MUDITAAAAA♥️♥️♥️♥️♥️♥️♥️."</div>
+                <div style="margin-top: 20px;">
+                    <button class="btn-magic" onclick="finalCelebrate()"> ek last cheez dhek k jaa MERI BAUNI ✨</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.className = "floating-heart"; heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+            document.getElementById('bgLayer').appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }, 1000);
+
+        function heartClick(e) {
+            const heart = document.createElement("div");
+            heart.className = "click-heart"; heart.innerHTML = "❤️";
+            heart.style.left = e.clientX + "px"; heart.style.top = e.clientY + "px";
+            document.body.appendChild(heart); setTimeout(() => heart.remove(), 800);
+        }
+
+        function finalCelebrate() {
+            confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+            setTimeout(() => {
+                document.body.style.opacity = '0';
+                setTimeout(() => { window.location.href = 'surprise.html'; }, 800);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>        
