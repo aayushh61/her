@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Only One ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     <style>
@@ -13,6 +13,7 @@
             font-family: 'Fredoka', sans-serif; height: 100vh; display: flex; 
             align-items: center; justify-content: center; margin: 0; overflow: hidden;
             transition: background 0.8s, opacity 0.8s, transform 0.8s;
+            touch-action: manipulation; /* Prevents accidental zooming on mobile taps */
         }
 
         .fade-out { opacity: 0; transform: scale(0.9); }
@@ -26,17 +27,17 @@
         .click-heart { position: fixed; color: var(--heart-red); font-size: 25px; pointer-events: none; animation: popUp 0.8s ease-out forwards; z-index: 1000; }
         @keyframes popUp { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -150%) scale(2); opacity: 0; } }
 
-        /* Card Animation - Breathing & Floating */
+        /* Card Animation - Optimized for Mobile Width */
         .welcome-card {
-            background: #ffffff; padding: 30px 20px; border-radius: 40px; border: 8px solid #ffe5ec;
-            text-align: center; max-width: 400px; width: 85%; z-index: 10;
-            box-shadow: 0 15px 30px rgba(251, 54, 64, 0.15);
+            background: #ffffff; padding: 25px 15px; border-radius: 30px; border: 6px solid #ffe5ec;
+            text-align: center; max-width: 320px; width: 85%; z-index: 10;
+            box-shadow: 0 10px 25px rgba(251, 54, 64, 0.15);
             animation: breathe 5s ease-in-out infinite;
         }
 
         @keyframes breathe {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.02); }
+            50% { transform: translateY(-10px) scale(1.02); }
         }
 
         /* Moving Icons */
@@ -50,12 +51,13 @@
             50% { transform: rotate(10deg) scale(1.1); }
         }
 
-        /* Pulsing Button */
+        /* Buttons responsive size */
         .btn-open {
-            background-color: var(--heart-red); color: white; padding: 18px 35px; border-radius: 25px;
-            font-size: 1.3rem; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 8px 0 #c9184a;
+            background-color: var(--heart-red); color: white; padding: 15px 30px; border-radius: 20px;
+            font-size: 1.1rem; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 6px 0 #c9184a;
             transition: all 0.3s;
             animation: pulseBtn 2s infinite;
+            width: 80%; /* Makes it easy to tap on mobile */
         }
 
         @keyframes pulseBtn {
@@ -66,46 +68,42 @@
 
         .btn-open:active { transform: translateY(4px) scale(0.95); box-shadow: 0 4px 0 #c9184a; }
 
+        h1 { font-size: 1.5rem; margin-bottom: 15px; }
+        p { font-size: 1rem; color: var(--text-brown); line-height: 1.4; }
+
         #victoryPage { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #fff9e6 0%, var(--success-gold) 100%); z-index: 200; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
         
-        /* Subtle text movement */
-        h1, h2 { animation: textGlow 3s ease-in-out infinite alternate; }
-        @keyframes textGlow {
-            from { text-shadow: 0 0 5px rgba(251, 54, 64, 0.1); }
-            to { text-shadow: 0 0 15px rgba(251, 54, 64, 0.3); }
-        }
+        h2 { font-size: 1.8rem; }
     </style>
 </head>
 <body id="mainBody" onclick="heartClick(event)">
     <div class="floating-bg" id="bgLayer"></div>
     
     <div class="welcome-card" id="welcomeCard">
-        <div class="icon-move" style="font-size: 3.5rem;">🧸</div>
-        <h1>HIII MERI MUDITAAAAA😋</h1>
-        <p>APKE LIYE EK CHOTA SA GIFT MERI TARAF SE 😎🙏 AGGE JANE K LIYE BUTTON DABAYE MALKIN ✨</p>
-        <button class="btn-open" onclick="showVictory()">BUTTON </button>
+        <div class="icon-move" style="font-size: 3rem;">🧸</div>
+        <h1>HIII MUDITAAAAA😋</h1>
+        <p>Apke liye ek chota sa gift meri taraf se! Agge jane k liye button dabaye malkin ✨</p>
+        <button class="btn-open" onclick="showVictory()">TAP HERE ❤️</button>
     </div>
 
     <div id="victoryPage">
-        <div class="icon-move" style="font-size: 5rem;">❤️</div>
+        <div class="icon-move" style="font-size: 4rem;">❤️</div>
         <h2>SURPRISEEEEE! ✨</h2>
-        <p>ye website maine sirf tere liye banayi h yk❤️<br></p>
-        <button class="btn-open" style="background-color: #ff9f1c; box-shadow: 0 8px 0 #e67e22; animation: pulseBtn 2s infinite;" onclick="startTransition('days.html')">Next! ✨</button>
+        <p>Ye website maine sirf tere liye banayi h yk ❤️</p>
+        <button class="btn-open" style="background-color: #ff9f1c; box-shadow: 0 6px 0 #e67e22;" onclick="startTransition('days.html')">Dekhe? ✨</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
-        // Floating hearts background logic
         setInterval(() => {
             const heart = document.createElement("div");
-            heart.className = "floating-heart"; heart.innerHTML = "💖"; // Changed to sparkly heart
+            heart.className = "floating-heart"; heart.innerHTML = "💖";
             heart.style.left = Math.random() * 100 + "vw";
             heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
             document.getElementById('bgLayer').appendChild(heart);
             setTimeout(() => heart.remove(), 8000);
         }, 800);
 
-        // Click effect
         function heartClick(e) {
             const heart = document.createElement("div");
             heart.className = "click-heart"; heart.innerHTML = "❤️";
@@ -117,7 +115,6 @@
             document.getElementById('welcomeCard').style.display = 'none';
             document.getElementById('victoryPage').style.display = 'flex';
             
-            // Continuous confetti burst
             var end = Date.now() + (2 * 1000);
             (function frame() {
                 confetti({
